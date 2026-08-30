@@ -206,6 +206,18 @@
 
 	<build>
 		<plugins>
+			<!-- Spring MVC resolves unannotated controller arguments by their
+			     Java parameter names, so every build must retain that metadata. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<parameters>true</parameters>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -221,17 +233,6 @@
 			</modules>
 			<build>
 				<plugins>
-					<!-- Compiler -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<version>${maven-compiler-plugin.version}</version>
-						<configuration>
-							<source>${maven.compiler.source}</source>
-							<target>${maven.compiler.target}</target>
-							<parameters>true</parameters>
-						</configuration>
-					</plugin>
 					<!-- Source -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>

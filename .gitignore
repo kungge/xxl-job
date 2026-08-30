@@ -18,3 +18,7 @@ package-lock.json
 .claude
 .specify
 specs
+
+# local environment files (keep templates)
+.env
+!.env.example

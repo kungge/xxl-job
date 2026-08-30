@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  xxl-job-admin:
+    image: ${XXL_JOB_ADMIN_IMAGE}
+    container_name: xxl-job-admin
+    restart: unless-stopped
+    environment:
+      SERVER_PORT: 8080
+      SPRING_DATASOURCE_URL: ${XXL_JOB_DB_URL}
+      SPRING_DATASOURCE_USERNAME: ${XXL_JOB_DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${XXL_JOB_DB_PASSWORD}
+      LOG_HOME: /data/applogs
+      JAVA_OPTS: ${XXL_JOB_JAVA_OPTS}
+    ports:
+      - "${XXL_JOB_ADMIN_BIND_IP}:${XXL_JOB_ADMIN_PORT}:8080"
+    volumes:
+      - ${XXL_JOB_LOG_PATH}:/data/applogs
+    networks:
+      - mogu
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+networks:
+  mogu:
+    external: true
